@@ -49,7 +49,19 @@ Alert.alert('Tag ja cadastrada','Você não pode cadastrar uma task com o mesmo 
   function handleRemoveTask(id: number) {
     //TODO - remove task from state
     // const data=tasks;
-    setTasks((oldTasks)=>oldTasks.filter((task)=>task.id !=id));
+    Alert.alert('Remover item','Tem certeza que você deseja remover esse item?',[
+      {text:'Sim',
+       onPress:()=>setTasks((oldTasks)=>oldTasks.filter((task)=>task.id !=id)),
+       
+      },
+      {
+        text:'Não',
+        onPress:()=>null,
+        style:'cancel'
+    }
+
+    ])
+    
   }
 
   return (
