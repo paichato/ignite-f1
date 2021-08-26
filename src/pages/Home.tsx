@@ -26,6 +26,14 @@ Alert.alert('Tag ja cadastrada','Você não pode cadastrar uma task com o mesmo 
     
   }
 
+  const handleEditTask=(taskId:number,taskNewTitle:string)=>{
+    tasks.map((task)=>{
+      if(task.id){
+        task.title=taskNewTitle
+      }
+    })
+  }
+
   function handleToggleTaskDone(id: number) {
     //TODO - toggle task done if exists
 
@@ -74,6 +82,7 @@ Alert.alert('Tag ja cadastrada','Você não pode cadastrar uma task com o mesmo 
         tasks={tasks} 
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask} 
+        editTask={handleEditTask}
       />
     </View>
   )
