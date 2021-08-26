@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import { Header } from '../components/Header';
 import { Task, TasksList } from '../components/TasksList';
@@ -17,7 +18,12 @@ export function Home() {
       title:newTaskTitle,
       done:false,
     }
-    setTasks((oldTasks)=>[...oldTasks,newTaskData])
+    if(tasks.find((task)=>task.title ===newTaskTitle)){
+Alert.alert('Tag ja cadastrada','Você não pode cadastrar uma task com o mesmo nome');
+    }else{
+      setTasks((oldTasks)=>[...oldTasks,newTaskData])
+    }
+    
   }
 
   function handleToggleTaskDone(id: number) {
