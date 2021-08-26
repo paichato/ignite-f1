@@ -32,7 +32,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask }: Tasks
       renderItem={({ item, index }) => {
         return (
           <ItemWrapper index={index}>
-            <TaskItem toggleTaskDone={toggleTaskDone} item={item} index={index} />
+            <TaskItem editTask={editTask} toggleTaskDone={toggleTaskDone} item={item} index={index} />
 
             <TouchableOpacity
               testID={`trash-${index}`}

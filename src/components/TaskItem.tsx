@@ -1,5 +1,8 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather';
 import { Task } from './TasksList';
 
@@ -7,9 +10,40 @@ interface taskItemProps{
     toggleTaskDone:(item:number)=>void;
     item:Task;
     index:number;
+    editTask:(taskId:number,taskNewTitle?:string)=>void;
 }
 
-export default function TaskItem({toggleTaskDone,item,index}:taskItemProps) {
+export default function TaskItem({toggleTaskDone,item,index,editTask}:taskItemProps) {
+
+    const [taskState, setTaskState] = useState<Boolean>(false);
+    const [editedTask, setEditedTask] = useState(item.title);
+    const textInputRef=useRef<TextInput>(null);
+
+    const handleStartEditing=()=>{
+        setTaskState(true);
+    }
+
+    const handleCancelEditing=()=>{
+        setEditedTask(item.title);
+        setTaskState(false);
+    }
+
+    const handleSubmitEditing=()=>{
+        editTask(item.id);
+        setTaskState(false);
+    }
+
+    useEffect(()=>{
+        if(textInputRef.current){
+            if(taskState){
+                textInputRef.current.focus();
+            }else{
+                textInputRef.current.blur();
+            }
+        }
+        
+    },[taskState])
+
     return (
         <View>
               <TouchableOpacity
