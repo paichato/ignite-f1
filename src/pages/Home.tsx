@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 
 import { Header } from '../components/Header';
-import { Task, TasksList } from '../components/TasksList';
+import { editTaskProps, Task, TasksList } from '../components/TasksList';
 import { TodoInput } from '../components/TodoInput';
 
 
@@ -26,7 +26,10 @@ Alert.alert('Tag ja cadastrada','Você não pode cadastrar uma task com o mesmo 
     
   }
 
-  const handleEditTask=(taskId:number,taskNewTitle:string)=>{
+  
+
+  // const handleEditTask=(taskId:number,taskNewTitle:string):void=>{
+    const handleEditTask=(taskId:number,taskNewTitle:string):void=>{
     tasks.map((task)=>{
       if(task.id){
         task.title=taskNewTitle

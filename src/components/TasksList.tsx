@@ -17,7 +17,11 @@ interface TasksListProps {
   tasks: Task[];
   toggleTaskDone: (id: number) => void;
   removeTask: (id: number) => void;
-  editTask:(id:number,newTitle:string)=>void;
+  editTask:(id:number,newTitle?:string)=>void;
+}
+
+export interface editTaskProps{
+  editTask:(id:number,newTitle?:string)=>void;
 }
 
 export function TasksList({ tasks, toggleTaskDone, removeTask, editTask }: TasksListProps) {
@@ -32,16 +36,16 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask }: Tasks
       renderItem={({ item, index }) => {
         return (
           <ItemWrapper index={index}>
-            <TaskItem editTask={editTask} toggleTaskDone={toggleTaskDone} item={item} index={index} />
+            <TaskItem removeTask={removeTask} editTask={editTask} toggleTaskDone={toggleTaskDone} item={item} index={index} />
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
               onPress={()=>removeTask(item.id)}
               //TODO - use onPress (remove task) prop
             >
               <Image source={trashIcon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </ItemWrapper>
         )
       }}
